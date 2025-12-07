@@ -150,6 +150,14 @@ npm install
 These commands remove restrictive proxy values and ensure the project can download
 dependencies before running `npm start`.
 
+If the dev server fails with `Module not found: Can't resolve 'react-dom/client'`,
+remove any stale dependencies and reinstall so React 18 artifacts are present:
+
+```bash
+rm -rf node_modules
+npm install
+```
+
 7. Open http://localhost:3000 to view it in the browser. Any changes you make to the code will be automatically reflected in the browser.
 
 8. If you want to generate the production files, change the `homepage` value from the `package.json` to the domain name that the app will be hosted on, and then run the following command in the terminal:
