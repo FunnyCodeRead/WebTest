@@ -150,13 +150,22 @@ npm install
 These commands remove restrictive proxy values and ensure the project can download
 dependencies before running `npm start`.
 
-If the dev server fails with `Module not found: Can't resolve 'react-dom/client'`,
-remove any stale dependencies and reinstall so React 18 artifacts are present:
+6. Open http://localhost:3000 to view it in the browser. Any changes you make to the code will be automatically reflected in the browser.
+
+If `npm install` fails with `403 Forbidden` errors for public packages (for example
+`@fortawesome/fontawesome-svg-core`), clear any inherited proxy settings and point npm
+directly at the public registry:
 
 ```bash
-rm -rf node_modules
+unset http_proxy https_proxy npm_config_http-proxy npm_config_https-proxy
+npm config delete proxy
+npm config delete https-proxy
+npm config set registry https://registry.npmjs.org/
 npm install
 ```
+
+These commands remove restrictive proxy values and ensure the project can download
+dependencies before running `npm start`.
 
 7. Open http://localhost:3000 to view it in the browser. Any changes you make to the code will be automatically reflected in the browser.
 
