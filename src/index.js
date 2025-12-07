@@ -7,14 +7,10 @@
 // * Official Repository: https://github.com/themesberg/volt-react-dashboard
 // * License: MIT License (https://themesberg.com/licensing)
 
-// * Designed and coded by https://themesberg.com
-
 // =========================================================
 
-// * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Please contact us to request a removal.
-
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom";
 import { HashRouter } from "react-router-dom";
 
 // core styles
@@ -28,15 +24,15 @@ import ScrollToTop from "./components/ScrollToTop";
 
 const rootElement = document.getElementById("root");
 
-if (rootElement) {
-  const root = createRoot(rootElement);
+const app = (
+  <React.StrictMode>
+    <HashRouter>
+      <ScrollToTop />
+      <HomePage />
+    </HashRouter>
+  </React.StrictMode>
+);
 
-  root.render(
-    <React.StrictMode>
-      <HashRouter>
-        <ScrollToTop />
-        <HomePage />
-      </HashRouter>
-    </React.StrictMode>
-  );
+if (rootElement) {
+  ReactDOM.render(app, rootElement);
 }
