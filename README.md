@@ -117,15 +117,17 @@ yarn build
 
 ### Using NPM
 
-3. Make sure you have [Node.js](https://nodejs.org/en/) installed. Make sure the installed Node version is >= 8.10 and of npm >= 5.6
+3. Make sure you have [Node.js](https://nodejs.org/en/) installed. Use an active LTS release such as Node 18 (older minimums like Node 8 will not work with the current React 18 tooling).
 
-4. After installing Node.js, open a terminal and run `npm install` in the main `volt-react-dashboard/` folder to download all project dependencies. You'll find them in the `node_modules/` folder.
+4. For Node 17+ (including Node 22), enable the legacy OpenSSL provider to prevent `ERR_OSSL_EVP_UNSUPPORTED` errors when starting or building the app. The repo includes an `.env` file that sets `NODE_OPTIONS=--openssl-legacy-provider` so you do not need to set it manually.
+
+5. After installing Node.js, open a terminal and run `npm install` in the main `volt-react-dashboard/` folder to download all project dependencies. You'll find them in the `node_modules/` folder.
 
 ```
 npm install
 ```
 
-5. Then start the app in development mode by running the following command in terminal:
+6. Then start the app in development mode by running the following command in terminal:
 
 ```
 npm run start
@@ -150,7 +152,24 @@ dependencies before running `npm start`.
 
 6. Open http://localhost:3000 to view it in the browser. Any changes you make to the code will be automatically reflected in the browser.
 
-7. If you want to generate the production files, change the `homepage` value from the `package.json` to the domain name that the app will be hosted on, and then run the following command in the terminal:
+If `npm install` fails with `403 Forbidden` errors for public packages (for example
+`@fortawesome/fontawesome-svg-core`), clear any inherited proxy settings and point npm
+directly at the public registry:
+
+```bash
+unset http_proxy https_proxy npm_config_http-proxy npm_config_https-proxy
+npm config delete proxy
+npm config delete https-proxy
+npm config set registry https://registry.npmjs.org/
+npm install
+```
+
+These commands remove restrictive proxy values and ensure the project can download
+dependencies before running `npm start`.
+
+7. Open http://localhost:3000 to view it in the browser. Any changes you make to the code will be automatically reflected in the browser.
+
+8. If you want to generate the production files, change the `homepage` value from the `package.json` to the domain name that the app will be hosted on, and then run the following command in the terminal:
 
 ```
 npm run build
