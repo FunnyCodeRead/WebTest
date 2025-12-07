@@ -150,6 +150,23 @@ npm install
 These commands remove restrictive proxy values and ensure the project can download
 dependencies before running `npm start`.
 
+6. Open http://localhost:3000 to view it in the browser. Any changes you make to the code will be automatically reflected in the browser.
+
+If `npm install` fails with `403 Forbidden` errors for public packages (for example
+`@fortawesome/fontawesome-svg-core`), clear any inherited proxy settings and point npm
+directly at the public registry:
+
+```bash
+unset http_proxy https_proxy npm_config_http-proxy npm_config_https-proxy
+npm config delete proxy
+npm config delete https-proxy
+npm config set registry https://registry.npmjs.org/
+npm install
+```
+
+These commands remove restrictive proxy values and ensure the project can download
+dependencies before running `npm start`.
+
 7. Open http://localhost:3000 to view it in the browser. Any changes you make to the code will be automatically reflected in the browser.
 
 8. If you want to generate the production files, change the `homepage` value from the `package.json` to the domain name that the app will be hosted on, and then run the following command in the terminal:
